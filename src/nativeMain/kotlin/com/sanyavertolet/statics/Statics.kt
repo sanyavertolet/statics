@@ -1,3 +1,7 @@
+/**
+ * File containing native implementation of statics
+ */
+
 package com.sanyavertolet.statics
 
 import io.ktor.server.routing.*

@@ -1,1 +1,3 @@
-rootProject.name = "ktor-server-static-resources"
+rootProject.name = "ktor-statics"
+
+includeBuild("gradle/plugins")

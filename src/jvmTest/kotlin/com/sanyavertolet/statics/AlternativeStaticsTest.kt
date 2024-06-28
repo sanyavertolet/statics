@@ -11,6 +11,7 @@ import io.ktor.util.*
 import okio.Path.Companion.toPath
 import kotlin.test.*
 
+@Suppress("DEPRECATION")
 class AlternativeStaticsTest {
     private val basePackage = "build".toPath(true)
         .div("test-files")

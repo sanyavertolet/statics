@@ -1,10 +1,15 @@
+import com.sanyavertolet.statics.buildutils.configureSigning
+
 plugins {
     alias(libs.plugins.ktor.plugin)
     alias(libs.plugins.kotlin.multiplatform)
+
+    id("com.sanyavertolet.statics.buildutils.code-quality-convention")
+    id("com.sanyavertolet.statics.buildutils.versioning-configuration")
+    id("com.sanyavertolet.statics.buildutils.publishing-configuration")
 }
 
 group = "com.sanyavertolet.statics"
-version = "0.0.1"
 
 repositories {
     mavenCentral()
@@ -39,3 +44,9 @@ kotlin {
         }
     }
 }
+
+tasks.withType<AbstractPublishToMaven> {
+    dependsOn(tasks.withType<Sign>())
+}
+
+configureSigning()
