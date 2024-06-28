@@ -6,7 +6,7 @@ on:
   pull_request:
 
 jobs:
-  diktat:
+  diktat_check:
     runs-on: ubuntu-latest
     permissions:
       security-events: write
