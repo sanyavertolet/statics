@@ -7,6 +7,10 @@ on:
       - 'master'
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.ref == 'refs/heads/master' && format('{0}-{1}', github.workflow, github.sha) || format('{0}-{1}', github.workflow, github.ref) }}
+  cancel-in-progress: true
+
 env:
   GRADLE_OPTS: -Dorg.gradle.daemon=true -Dorg.gradle.parallel=true -Dorg.gradle.welcome=never
 
