@@ -13,7 +13,6 @@ env:
 jobs:
   build:
     name: 'Build (Java 17)'
-    java-version: 17
     strategy:
       matrix:
         runs-on: [ ubuntu-latest, macos-latest ]
