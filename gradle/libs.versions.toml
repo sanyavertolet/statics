@@ -8,14 +8,15 @@ reckon = "0.18.0"
 diktat = "2.0.0"
 publish = "1.3.0"
 sarif4k = "0.5.0"
+dokka = "1.9.20"
 
 [plugins]
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
-ktor-plugin = { id = "io.ktor.plugin", version.ref = "ktor" }
+ktor = { id = "io.ktor.plugin", version.ref = "ktor" }
+dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 
 [libraries]
-
 # ktor
 ktor-server-core = { module = "io.ktor:ktor-server-core", version.ref = "ktor" }
 ktor-server-tests = { module = "io.ktor:ktor-server-tests", version.ref = "ktor" }
