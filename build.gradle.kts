@@ -2,7 +2,6 @@ import com.sanyavertolet.statics.buildutils.configureSigning
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
-    alias(libs.plugins.ktor)
     alias(libs.plugins.dokka)
 
     id("com.sanyavertolet.statics.buildutils.code-quality-convention")
