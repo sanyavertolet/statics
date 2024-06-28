@@ -1,4 +1,4 @@
-name: 'Build'
+name: 'Build and Test'
 
 on:
   pull_request:
@@ -13,7 +13,7 @@ env:
 jobs:
   build:
     name: 'Build (Java 17)'
-    java-version: '17'
+    java-version: 17
     strategy:
       matrix:
         runs-on: [ ubuntu-latest, macos-latest ]
@@ -67,7 +67,7 @@ jobs:
 
       - name: 'Publish macos snapshot'
         id: publish
-        if: ${{ github.event_name == 'push' && github.ref_type == 'branch' && github.ref == 'refs/heads/master' && runner.os == macos-latest }}
+        if: ${{ github.event_name == 'push' && github.ref_type == 'branch' && github.ref == 'refs/heads/master' && runner.os == 'macos-latest' }}
         uses: gradle/gradle-build-action@v2.10.0
         with:
           gradle-version: wrapper
@@ -78,7 +78,7 @@ jobs:
 
       - name: 'Publish linux snapshot'
         id: publish
-        if: ${{ github.event_name == 'push' && github.ref_type == 'branch' && github.ref == 'refs/heads/master' && runner.os == linux-latest }}
+        if: ${{ github.event_name == 'push' && github.ref_type == 'branch' && github.ref == 'refs/heads/master' && runner.os == 'linux-latest' }}
         uses: gradle/gradle-build-action@v2.10.0
         with:
           gradle-version: wrapper
@@ -89,7 +89,7 @@ jobs:
 
       - name: 'Publish JVM snapshot'
         id: publish
-        if: ${{ github.event_name == 'push' && github.ref_type == 'branch' && github.ref == 'refs/heads/master' && runner.os == ubuntu-latest }}
+        if: ${{ github.event_name == 'push' && github.ref_type == 'branch' && github.ref == 'refs/heads/master' && runner.os == 'ubuntu-latest' }}
         uses: gradle/gradle-build-action@v2.10.0
         with:
           gradle-version: wrapper
