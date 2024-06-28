@@ -15,16 +15,22 @@ import kotlinx.cinterop.toKString
 import okio.FileSystem
 import okio.Path.Companion.toPath
 import platform.posix.getcwd
-import kotlin.test.Test
-import kotlin.test.assertContains
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
+import kotlin.test.*
 
 class StaticsTest {
-    private val basePackage = "src".toPath(true)
-        .div("nativeTest")
-        .div("resources")
+    private val basePackage = "build".toPath(true)
+        .div("test-files")
         .div("public")
+
+    @BeforeTest
+    fun init() {
+        createFilesForTesting(basePackage)
+    }
+
+    @AfterTest
+    fun cleanUp() {
+        deleteFilesForTesting(basePackage)
+    }
 
     @Test
     fun indexTest() = testApplication {

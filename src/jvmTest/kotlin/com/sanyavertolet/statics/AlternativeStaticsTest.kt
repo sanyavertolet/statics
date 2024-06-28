@@ -9,20 +9,25 @@ import io.ktor.server.routing.*
 import io.ktor.server.testing.*
 import io.ktor.util.*
 import okio.Path.Companion.toPath
-import kotlin.test.Test
-import kotlin.test.assertContains
-import kotlin.test.assertEquals
+import kotlin.test.*
 
 class AlternativeStaticsTest {
-    private val basePackage = "src".toPath(true)
-        .div("jvmTest")
-        .div("resources")
+    private val basePackage = "build".toPath(true)
+        .div("test-files")
         .div("public")
+
+    @BeforeTest
+    fun init() {
+        createFilesForTesting(basePackage)
+    }
+
+    @AfterTest
+    fun cleanUp() {
+        deleteFilesForTesting(basePackage)
+    }
 
     @Test
     fun indexTest() = testApplication {
-        println(basePackage)
-
         routing {
             alternativeStatics("/", basePackage.toString())
         }
