@@ -1,6 +1,6 @@
 plugins {
-    kotlin("multiplatform") version "2.0.0"
-    id("io.ktor.plugin") version "2.3.12"
+    alias(libs.plugins.ktor.plugin)
+    alias(libs.plugins.kotlin.multiplatform)
 }
 
 group = "com.sanyavertolet.statics"
@@ -20,35 +20,22 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation("io.ktor:ktor-server-core:2.3.11")
-                implementation("io.ktor:ktor-server-cio:2.3.11")
-
-                implementation("com.squareup.okio:okio:3.9.0")
+                implementation(libs.ktor.server.core)
+                implementation(libs.okio)
             }
-        }
-
-        nativeMain {
-
         }
 
         jvmMain {
             dependencies {
-                implementation("ch.qos.logback:logback-classic:1.5.6")
+                implementation(libs.logback.classic)
             }
         }
 
         commonTest {
             dependencies {
-                implementation("io.ktor:ktor-server-tests:2.3.11")
+                implementation(libs.ktor.server.tests)
                 implementation(kotlin("test"))
             }
         }
     }
-}
-
-application {
-    mainClass.set("com.sanyavertolet.ApplicationKt")
-
-    val isDevelopment: Boolean = project.ext.has("development")
-    applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
 }

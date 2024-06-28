@@ -57,7 +57,7 @@ class AlternativeStaticsTest {
         assertContains(jsScript, "Hello, Kotlin!")
         assertContains(response.headers.toMap(), HttpHeaders.ContentType)
         assertEquals(
-            ContentType.Application.JavaScript.toString(),
+            ContentType.Text.JavaScript.withCharset(Charsets.UTF_8).toString(),
             response.headers[HttpHeaders.ContentType],
         )
     }

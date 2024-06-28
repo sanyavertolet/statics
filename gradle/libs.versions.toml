@@ -1,0 +1,28 @@
+[versions]
+kotlin = "2.0.0"
+detekt = "1.23.1"
+ktor = "2.3.12"
+okio = "3.9.0"
+logback = "1.5.6"
+reckon = "0.18.0"
+diktat = "2.0.0"
+
+
+[plugins]
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+ktor-plugin = { id = "io.ktor.plugin", version.ref = "ktor" }
+
+[libraries]
+# ktor
+ktor-server-core = { module = "io.ktor:ktor-server-core", version.ref = "ktor" }
+ktor-server-tests = { module = "io.ktor:ktor-server-tests", version.ref = "ktor" }
+
+# others
+okio = { module = "com.squareup.okio:okio", version.ref = "okio" }
+logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
+
+# gradle-plugins
+diktat-gradle-plugin = { module = "com.saveourtool.diktat:diktat-gradle-plugin", version.ref = "diktat" }
+detekt-gradle-plugin = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
+reckon-gradle-plugin = { module = "org.ajoberstar.reckon:reckon-gradle", version.ref = "reckon" }
