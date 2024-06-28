@@ -13,6 +13,8 @@ jobs:
   detekt:
     name: 'Detekt'
     runs-on: ubuntu-latest
+    permissions:
+      security-events: write
 
     steps:
       - uses: actions/checkout@v4
