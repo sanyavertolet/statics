@@ -77,6 +77,7 @@ jobs:
           gradle-version: wrapper
           arguments: |
             publishMacosX64PublicationToGitHubRepository
+            publishKotlinMultiplatformPublicationToGitHubRepository
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

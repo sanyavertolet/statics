@@ -63,8 +63,21 @@ jobs:
             publishLinuxArm64PublicationToGitHubRepository
             publishMacosX64PublicationToGitHubRepository
             publishMacosArm64PublicationToGitHubRepository
+            publishKotlinMultiplatformPublicationToGitHubRepository
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 'Publish MPP release of lib'
+        id: publish-mpp
+        if: ${{ runner.os == 'Linux' }}
+        uses: gradle/gradle-build-action@v2.10.0
+        with:
+          gradle-version: wrapper
+          arguments: |
+            build
+            publishKotlinMultiplatformPublicationToGitHubRepository
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   github_release:
     needs: release
