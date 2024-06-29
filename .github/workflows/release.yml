@@ -52,28 +52,25 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: 'Publish native release of lib'
+      - name: 'Publish ubuntu release of lib'
         id: publish-native-ubuntu
         if: ${{ runner.os == 'Linux' }}
         uses: gradle/gradle-build-action@v3.4.2
         with:
           gradle-version: wrapper
           arguments: |
-            build
             publishLinuxX64PublicationToGitHubRepository
             publishLinuxArm64PublicationToGitHubRepository
-            publishKotlinMultiplatformPublicationToGitHubRepository
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: 'Publish native release of lib'
+      - name: 'Publish macOS release of lib'
         id: publish-native-macos
         if: ${{ runner.os == 'macOS' }}
         uses: gradle/gradle-build-action@v3.4.2
         with:
           gradle-version: wrapper
           arguments: |
-            build
             publishMacosX64PublicationToGitHubRepository
             publishMacosArm64PublicationToGitHubRepository
         env:
@@ -85,7 +82,6 @@ jobs:
         with:
           gradle-version: wrapper
           arguments: |
-            build
             publishKotlinMultiplatformPublicationToGitHubRepository
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
