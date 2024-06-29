@@ -1,0 +1,7 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:com.sanyavertolet.statics////PointingToDeclaration/ktor-statics/com.sanyavertolet.statics/index.html
+$dokka.location:com.sanyavertolet.statics//alternativeStatics/io.ktor.server.routing.Routing#kotlin.String#kotlin.String?#kotlin.String?/PointingToDeclaration/ktor-statics/com.sanyavertolet.statics/alternative-statics.html
+$dokka.location:com.sanyavertolet.statics//statics/io.ktor.server.routing.Routing#kotlin.String#kotlin.String?#kotlin.String?/PointingToDeclaration/ktor-statics/com.sanyavertolet.statics/statics.html
+com.sanyavertolet.statics
+
