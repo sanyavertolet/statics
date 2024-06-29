@@ -13,9 +13,10 @@ env:
 jobs:
   release:
     name: 'Release (Java 17)'
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        runs-on: [ ubuntu-latest, macos-latest ]
+        os: [ ubuntu-latest, macos-latest ]
 
     steps:
       - uses: actions/checkout@v4
@@ -31,7 +32,7 @@ jobs:
 
       - name: 'Cache ~/.konan'
         id: cache-konan
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ~/.konan
@@ -40,8 +41,19 @@ jobs:
             ${{ runner.os }}-konan-${{ hashFiles('**/*.gradle.kts', '**/gradle-wrapper.properties') }}-
             ${{ runner.os }}-konan-
 
+      - name: 'Publish JVM release of lib'
+        id: publish-jvm
+        if: ${{ runner.os == 'Linux' }}
+        uses: gradle/gradle-build-action@v2.10.0
+        with:
+          gradle-version: wrapper
+          arguments: |
+            publishJvmPublicationToGitHubRepository
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: 'Publish native release of lib'
-        id: publish-core
+        id: publish-native
         uses: gradle/gradle-build-action@v2.10.0
         with:
           gradle-version: wrapper
@@ -51,17 +63,19 @@ jobs:
             publishLinuxArm64PublicationToGitHubRepository
             publishMacosX64PublicationToGitHubRepository
             publishMacosArm64PublicationToGitHubRepository
+            publishKotlinMultiplatformPublicationToGitHubRepository
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: 'Publish JVM release of lib'
-        id: publish
-        if: ${{ runner.os == ubuntu-latest }}
+      - name: 'Publish MPP release of lib'
+        id: publish-mpp
+        if: ${{ runner.os == 'Linux' }}
         uses: gradle/gradle-build-action@v2.10.0
         with:
           gradle-version: wrapper
           arguments: |
-            publishJvmPublicationToGitHubRepository
+            build
+            publishKotlinMultiplatformPublicationToGitHubRepository
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

@@ -1,4 +1,4 @@
-name: 'Build'
+name: 'Build and Test'
 
 on:
   pull_request:
@@ -7,16 +7,20 @@ on:
       - 'master'
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.ref == 'refs/heads/master' && format('{0}-{1}', github.workflow, github.sha) || format('{0}-{1}', github.workflow, github.ref) }}
+  cancel-in-progress: true
+
 env:
   GRADLE_OPTS: -Dorg.gradle.daemon=true -Dorg.gradle.parallel=true -Dorg.gradle.welcome=never
 
 jobs:
   build:
     name: 'Build (Java 17)'
-    java-version: '17'
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        runs-on: [ ubuntu-latest, macos-latest ]
+        os: [ ubuntu-latest, macos-latest ]
 
     # A possible workaround for <https://github.com/dorny/test-reporter/issues/168>.
     permissions:
@@ -45,7 +49,7 @@ jobs:
 
       - name: 'Cache ~/.konan'
         id: cache-konan
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ~/.konan
@@ -65,20 +69,21 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: 'Publish macos snapshot'
-        id: publish
-        if: ${{ github.event_name == 'push' && github.ref_type == 'branch' && github.ref == 'refs/heads/master' && runner.os == macos-latest }}
+      - name: 'Publish macOS snapshot'
+        id: publish-macos
+        if: ${{ github.event_name == 'push' && github.ref_type == 'branch' && github.ref == 'refs/heads/master' && runner.os == 'macOS' }}
         uses: gradle/gradle-build-action@v2.10.0
         with:
           gradle-version: wrapper
           arguments: |
             publishMacosX64PublicationToGitHubRepository
+            publishKotlinMultiplatformPublicationToGitHubRepository
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: 'Publish linux snapshot'
-        id: publish
-        if: ${{ github.event_name == 'push' && github.ref_type == 'branch' && github.ref == 'refs/heads/master' && runner.os == linux-latest }}
+      - name: 'Publish ubuntu snapshot'
+        id: publish-linux
+        if: ${{ github.event_name == 'push' && github.ref_type == 'branch' && github.ref == 'refs/heads/master' && runner.os == 'Linux' }}
         uses: gradle/gradle-build-action@v2.10.0
         with:
           gradle-version: wrapper
@@ -88,8 +93,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: 'Publish JVM snapshot'
-        id: publish
-        if: ${{ github.event_name == 'push' && github.ref_type == 'branch' && github.ref == 'refs/heads/master' && runner.os == ubuntu-latest }}
+        id: publish-jvm
+        if: ${{ github.event_name == 'push' && github.ref_type == 'branch' && github.ref == 'refs/heads/master' && runner.os == 'Linux' }}
         uses: gradle/gradle-build-action@v2.10.0
         with:
           gradle-version: wrapper

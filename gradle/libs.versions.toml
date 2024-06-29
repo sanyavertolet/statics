@@ -13,7 +13,6 @@ dokka = "1.9.20"
 [plugins]
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
-ktor = { id = "io.ktor.plugin", version.ref = "ktor" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 
 [libraries]
