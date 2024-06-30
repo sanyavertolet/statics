@@ -1,6 +1,10 @@
 package com.sanyavertolet.statics
 
-import okio.*
+import okio.FileSystem
+import okio.Path
+import okio.SYSTEM
+import okio.buffer
+import okio.use
 
 private val clientJsFileContent = """
     |document.addEventListener('DOMContentLoaded', (event) => {

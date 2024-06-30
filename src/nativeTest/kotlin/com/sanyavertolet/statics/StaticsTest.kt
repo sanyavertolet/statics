@@ -9,12 +9,8 @@ import io.ktor.server.routing.*
 import io.ktor.server.testing.*
 import io.ktor.util.*
 import io.ktor.utils.io.charsets.*
-import kotlinx.cinterop.ExperimentalForeignApi
-import kotlinx.cinterop.refTo
-import kotlinx.cinterop.toKString
 import okio.FileSystem
 import okio.Path.Companion.toPath
-import platform.posix.getcwd
 import kotlin.test.*
 
 class StaticsTest {

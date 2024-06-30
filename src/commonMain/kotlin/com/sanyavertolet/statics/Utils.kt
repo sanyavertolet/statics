@@ -4,16 +4,20 @@
 
 package com.sanyavertolet.statics
 
-import io.ktor.http.*
-import io.ktor.server.application.*
-import io.ktor.server.response.*
-import io.ktor.util.pipeline.*
+import io.ktor.http.ContentType
+import io.ktor.http.HttpStatusCode
+import io.ktor.http.defaultForFileExtension
+import io.ktor.server.application.ApplicationCall
+import io.ktor.server.application.call
+import io.ktor.server.response.respond
+import io.ktor.server.response.respondText
+import io.ktor.util.pipeline.PipelineContext
 import okio.FileSystem
 import okio.Path
 import okio.SYSTEM
 
 /**
- * Respond to request with content of file with [filePath]
+ * Respond to request with content of file with [filePath] setting [ContentType] suitable for file according to its extension
  *
  * @param filePath path to file
  * @return Unit

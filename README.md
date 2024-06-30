@@ -1,4 +1,4 @@
-# Ktor Multiplatform Statics for Server
+# Module ktor-statics
 
 This project is a tiny library for `Ktor`-based apps designed to serve static files such as HTML, JavaScript, and CSS.
 The problem is that Ktor has `staticResources()` on `jvm`, while `native` does not have any easy mechanism to configure serving static files.

@@ -4,12 +4,12 @@
 
 package com.sanyavertolet.statics
 
-import io.ktor.server.routing.*
+import io.ktor.server.routing.Routing
 
 /**
  * Sets up Routing to serve resources as static content.
  * All resources inside [basePackage] will be accessible.
- * If requested resource doesn't exist and index is not null, then response will be [index] resource in the requested package.
+ * If requested resource doesn't exist and [index] is not null, then response will be [index] resource in the requested package.
  * If requested resource doesn't exist and no [index] specified, response will be `404 Not Found`.
  *
  * On JVM, staticResources is used by default.
