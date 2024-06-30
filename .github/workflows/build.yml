@@ -68,37 +68,3 @@ jobs:
             allTests
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: 'Publish macOS snapshot'
-        id: publish-macos
-        if: ${{ github.event_name == 'push' && github.ref_type == 'branch' && github.ref == 'refs/heads/master' && runner.os == 'macOS' }}
-        uses: gradle/gradle-build-action@v3.4.2
-        with:
-          gradle-version: wrapper
-          arguments: |
-            publishMacosX64PublicationToGitHubRepository
-            publishKotlinMultiplatformPublicationToGitHubRepository
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: 'Publish ubuntu snapshot'
-        id: publish-linux
-        if: ${{ github.event_name == 'push' && github.ref_type == 'branch' && github.ref == 'refs/heads/master' && runner.os == 'Linux' }}
-        uses: gradle/gradle-build-action@v3.4.2
-        with:
-          gradle-version: wrapper
-          arguments: |
-            publishLinuxX64PublicationToGitHubRepository
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: 'Publish JVM snapshot'
-        id: publish-jvm
-        if: ${{ github.event_name == 'push' && github.ref_type == 'branch' && github.ref == 'refs/heads/master' && runner.os == 'Linux' }}
-        uses: gradle/gradle-build-action@v3.4.2
-        with:
-          gradle-version: wrapper
-          arguments: |
-            publishJvmPublicationToGitHubRepository
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
