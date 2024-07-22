@@ -44,7 +44,7 @@ jobs:
       - name: 'Publish JVM release of lib'
         id: publish-jvm
         if: ${{ runner.os == 'Linux' }}
-        uses: gradle/gradle-build-action@v3.4.2
+        uses: gradle/gradle-build-action@v3.5.0
         with:
           gradle-version: wrapper
           arguments: |
@@ -55,7 +55,7 @@ jobs:
       - name: 'Publish ubuntu release of lib'
         id: publish-native-ubuntu
         if: ${{ runner.os == 'Linux' }}
-        uses: gradle/gradle-build-action@v3.4.2
+        uses: gradle/gradle-build-action@v3.5.0
         with:
           gradle-version: wrapper
           arguments: |
@@ -67,7 +67,7 @@ jobs:
       - name: 'Publish macOS release of lib'
         id: publish-native-macos
         if: ${{ runner.os == 'macOS' }}
-        uses: gradle/gradle-build-action@v3.4.2
+        uses: gradle/gradle-build-action@v3.5.0
         with:
           gradle-version: wrapper
           arguments: |
@@ -78,7 +78,7 @@ jobs:
       - name: 'Publish MPP release of lib'
         id: publish-mpp
         if: ${{ runner.os == 'Linux' }}
-        uses: gradle/gradle-build-action@v3.4.2
+        uses: gradle/gradle-build-action@v3.5.0
         with:
           gradle-version: wrapper
           arguments: |
